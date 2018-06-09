@@ -1,0 +1,24 @@
+{
+  "presets": [
+    "react",
+    ["env", { "modules": "commonjs" }],
+    "flow"
+  ],
+  "plugins": [
+    "transform-object-rest-spread",
+    "add-react-displayname",
+    "transform-class-properties"
+  ],
+  "env": {
+    "test": {
+      "presets": [
+        "react",
+        [ "env", { "useBuiltIns": "usage", "modules": "commonjs", "targets": { "node": "current" } } ],
+        "flow"
+      ],
+      "plugins": [
+        "transform-object-rest-spread"
+      ]
+    }
+  }
+}

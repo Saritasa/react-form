@@ -1,0 +1,68 @@
+{
+  "name": "@saritasa/react-form",
+  "version": "0.0.0",
+  "description": "Package that wraps Formik lib to use saritasa's code-style",
+  "scripts": {
+    "prebuild": "rimraf ./build",
+    "build": "babel -d ./build --ignore *.test.js ./src",
+    "postbuild": "node add-flow-types",
+    "flow": "flow",
+    "lint": "npm run _lint",
+    "lint:fix": "npm run _lint -- --fix",
+    "lint:changed": "npm run _lint -- --cache",
+    "linttest:changed": "npm run _linttest -- --cache",
+    "_lint": "eslint -c ./.eslintrc.yml \"src/**/*.js\" --ignore-pattern \"src/**/*.test.js\"",
+    "test": "NODE_ENV=test mocha --require babel-core/register --require ./test-support --recursive \"src/**/*.test.js\""
+  },
+  "keywords": [
+    "saritasa",
+    "react",
+    "form",
+    "formik"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/saritasa/react-form.git"
+  },
+  "author": "Konstantine Petryaev <numminorihsf@gmail.com>",
+  "main": "build/index.js",
+  "files": [
+    "build"
+  ],
+  "license": "ISC",
+  "dependencies": {
+    "formik": "^0.11.11"
+  },
+  "devDependencies": {
+    "@saritasa/eslint-config-react": "^0.1.1",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-eslint": "^8.2.3",
+    "babel-plugin-add-react-displayname": "0.0.5",
+    "babel-plugin-flow-react-proptypes": "^24.0.1",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-flow": "^6.23.0",
+    "babel-preset-react": "^6.24.1",
+    "chai": "^4.1.2",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "eslint": "^4.19.1",
+    "eslint-plugin-compat": "^2.3.0",
+    "eslint-plugin-eslint-comments": "^2.0.2",
+    "eslint-plugin-flowtype": "^2.49.3",
+    "eslint-plugin-import": "^2.12.0",
+    "eslint-plugin-jsdoc": "^3.7.1",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-prettier": "^2.6.0",
+    "eslint-plugin-react": "^7.9.1",
+    "flow-bin": "^0.73.0",
+    "glob": "^7.1.2",
+    "mocha": "^5.2.0",
+    "prettier": "^1.13.5",
+    "react": "^16.4.0",
+    "react-dom": "^16.4.0",
+    "rimraf": "^2.6.2"
+  }
+}
