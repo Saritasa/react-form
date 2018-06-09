@@ -1,5 +1,4 @@
 // @flow
-
 import * as React from 'react';
 
 /* eslint-disable no-unused-vars */
