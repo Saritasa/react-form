@@ -1,5 +1,6 @@
 // @flow
-type FieldRule<T> = (T, string) => T;
+type FieldRule<T> = (T, field?: string) => T;
+type StrictFieldRule<T> = (T, string) => T;
 type FieldRules<T> = FieldRule<T> | Array<FieldRule<T>>;
 
 /**
@@ -12,7 +13,7 @@ type FieldRules<T> = FieldRule<T> | Array<FieldRule<T>>;
 export function createFieldRules<T>(
   rule: FieldRule<T>,
   ...otherRules: Array<FieldRule<T>>
-): FieldRule<T> {
+): StrictFieldRule<T> {
   const rules: FieldRules<T> = Array.isArray(rule)
     ? [...rule, ...otherRules]
     : [rule, ...otherRules];
