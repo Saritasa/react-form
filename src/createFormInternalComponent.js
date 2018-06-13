@@ -1,16 +1,16 @@
 // @flow
 import * as React from 'react';
-import { type FormikProps } from 'formik';
+import { type FormikProps } from './FormikTypes';
 
 import { FormValueManipulationContext } from './FormValueManipulationContext';
 
-export type FromInternalComponentProps<Values> = FormikProps<Values> & {
+export type FromInternalComponentProps<Values: Object> = FormikProps<Values> & {
   allowChangesWhileSubmitting?: false,
   fieldRules: (Values, ?string) => Values,
   disabledSubmit?: boolean,
 };
 
-export function createFormInternalComponent<Values>(Component: *) {
+export function createFormInternalComponent<Values: Object>(Component: *) {
   class FormInternal extends React.PureComponent<
     FromInternalComponentProps<Values>,
   > {

@@ -1,18 +1,24 @@
 // @flow
 import * as React from 'react';
-import { Formik, type FormikActions } from 'formik';
+import { Formik,  } from 'formik';
+import { type FormikErrors, type FormikActions, type FormikConfig } from './FormikTypes';
 
 import { createFormInternalComponent } from './createFormInternalComponent';
 
 type FormikInstance = Formik<> & FormikActions<$PropertyType<*, 'values'>>;
 
+export type FormProps<Values: Object> = FormikConfig<Values> & {
+  errors?: FormikErrors<Values>,
+  submitting?: boolean,
+  onSubmit: (Values, FormikActions<Values>) => void | (Values) => void,
+  allowChangesWhileSubmitting?: boolean,
+};
+
 /**
  * Form class that allows to work with
  */
-export class Form extends React.PureComponent<*> {
+export class Form<Values: Object> extends React.PureComponent<FormProps<Values>> {
   static defaultProps = {
-    loading: false,
-    isValid: true,
     allowChangesWhileSubmitting: false,
     component: () => `Use #component property for form's layout.`,
   };
