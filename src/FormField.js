@@ -29,8 +29,8 @@ export type FormFieldComponentProps<ValueType> = {
 
 export type FormFieldProps<ValueType> = {
   name: string,
-  render: empty,
-  children: empty,
+  render?: empty,
+  children?: empty,
   component:
     | string
     | Class<React.Component<FormFieldComponentProps<ValueType>>>

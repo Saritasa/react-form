@@ -8,12 +8,18 @@ export type FromInternalComponentProps<Values: Object> = FormikProps<Values> & {
   allowChangesWhileSubmitting?: false,
   fieldRules: (Values, ?string) => Values,
   disabledSubmit?: boolean,
+  valid: boolean,
+  submitting: boolean,
+  onChange: (SyntheticInputEvent<*> => any),
+  onBlur: (SyntheticFocusEvent<*> => any),
+  onSubmit: (SyntheticEvent<*> => any),
+  onReset: (SyntheticEvent<*> => any),
 };
 
 export function createFormInternalComponent<Values: Object>(Component: *) {
   class FormInternal extends React.PureComponent<
     FromInternalComponentProps<Values>,
-  > {
+    > {
     values: Values;
 
     static defaultProps = {
@@ -37,7 +43,7 @@ export function createFormInternalComponent<Values: Object>(Component: *) {
     handleChange = (
       event: SyntheticInputEvent<
         HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement,
-      >,
+        >,
     ) => {
       if (this.shouldPreventChanges()) {
         event.preventDefault();

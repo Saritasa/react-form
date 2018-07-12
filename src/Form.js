@@ -1,16 +1,19 @@
 // @flow
 import * as React from 'react';
-import { Formik,  } from 'formik';
+import { Formik } from 'formik';
 import { type FormikErrors, type FormikActions, type FormikConfig } from './FormikTypes';
 
 import { createFormInternalComponent } from './createFormInternalComponent';
 
 type FormikInstance = Formik<> & FormikActions<$PropertyType<*, 'values'>>;
 
-export type FormProps<Values: Object> = FormikConfig<Values> & {
+export type FormProps<Values: Object> = {
+  ...$Exact<FormikConfig<Values>>,
   errors?: FormikErrors<Values>,
   submitting?: boolean,
   onSubmit: (Values, FormikActions<Values>) => void | (Values) => void,
+  component: Class<React.Component<any>> | React.StatelessFunctionalComponent<any>,
+  fieldRules: (Values, string) => Values,
   allowChangesWhileSubmitting?: boolean,
 };
 

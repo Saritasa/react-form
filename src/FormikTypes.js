@@ -78,7 +78,8 @@ export type FormikSharedConfig = {
   enableReinitialize?: boolean
 };
 
-export type FormikConfig<Values: Object> = FormikSharedConfig & {
+export type FormikConfig<Values: Object> = {
+  ...$Exact<FormikSharedConfig>,
   /**
    * Initial values of the form
    */
@@ -92,7 +93,7 @@ export type FormikConfig<Values: Object> = FormikSharedConfig & {
   /**
    * Form component to render
    */
-  component?: React$ComponentType<FormikProps<Values> | void>,
+  component: React$ComponentType<FormikProps<Values> | void>,
 
   /**
    * Render prop (works like React router's <Route render={props =>} />)
@@ -108,7 +109,7 @@ export type FormikConfig<Values: Object> = FormikSharedConfig & {
    * Validation function. Must return an error object or promise that
    * throws an error object where that object keys map to corresponding value.
    */
-  validate?: (values: Values) => void | Object | Promise<any>,
+  validate?: (values: Values) => null | Object | Promise<any>,
 
   /**
    * React children or child render callback
@@ -165,10 +166,11 @@ export type FormikHandlers = {
   handleReset: () => void
 };
 
-export type FormikProps<Values: Object> = FormikState<Values> &
-  FormikActions<Values> &
-  FormikHandlers &
-  FormikComputedProps<Values>;
+export type FormikProps<Values: Object> = FormikActions<Values> & {|
+  ...$Exact<FormikHandlers>,
+  ...$Exact<FormikComputedProps<Values>>,
+  ...$Exact<FormikState<Values>>,
+|};
 
 export class Formik<
   Values: Object,
