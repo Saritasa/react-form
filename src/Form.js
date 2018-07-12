@@ -1,7 +1,11 @@
 // @flow
 import * as React from 'react';
 import { Formik } from 'formik';
-import { type FormikErrors, type FormikActions, type FormikConfig } from './FormikTypes';
+import {
+  type FormikErrors,
+  type FormikActions,
+  type FormikConfig,
+} from './FormikTypes';
 
 import { createFormInternalComponent } from './createFormInternalComponent';
 
@@ -11,16 +15,20 @@ export type FormProps<Values: Object> = {
   ...$Exact<FormikConfig<Values>>,
   errors?: FormikErrors<Values>,
   submitting?: boolean,
-  onSubmit: (Values, FormikActions<Values>) => void | (Values) => void,
-  component: Class<React.Component<any>> | React.StatelessFunctionalComponent<any>,
+  onSubmit: (Values, FormikActions<Values>) => void | (Values => void),
+  component:
+    | Class<React.Component<any>>
+    | React.StatelessFunctionalComponent<any>,
   fieldRules: (Values, string) => Values,
   allowChangesWhileSubmitting?: boolean,
 };
 
 /**
- * Form class that allows to work with
+ * Form class that allows to work with.
  */
-export class Form<Values: Object> extends React.PureComponent<FormProps<Values>> {
+export class Form<Values: Object> extends React.PureComponent<
+  FormProps<Values>,
+> {
   static defaultProps = {
     allowChangesWhileSubmitting: false,
     component: () => `Use #component property for form's layout.`,

@@ -1,13 +1,13 @@
 // @flow
 // flow-typed signature: 5611f21d2cf7f4049f5e7ac100db47ba
 // flow-typed version: 21f5aed438/formik_v0.11.x/flow_>=v0.53.x
-
+/* eslint-disable import/no-mutable-exports, no-var, vars-on-top, no-undef, require-jsdoc */
 export type FormikErrors<Values: Object> = {
-  [field: $Keys<Values>]: string
+  [field: $Keys<Values>]: string,
 };
 
 export type FormikTouched<Values: Object> = {
-  [field: $Keys<Values>]: boolean
+  [field: $Keys<Values>]: boolean,
 };
 
 /**
@@ -34,7 +34,7 @@ export interface FormikActions<Values: Object> {
   setFieldValue(
     field: $Keys<Values>,
     value: any,
-    shouldValidate?: boolean
+    shouldValidate?: boolean,
   ): void;
   setFieldValue(field: string, value: any, shouldValidate?: boolean): void;
   /** Set error message of a form field directly */
@@ -44,12 +44,12 @@ export interface FormikActions<Values: Object> {
   setFieldTouched(
     field: $Keys<Values>,
     isTouched?: boolean,
-    shouldValidate?: boolean
+    shouldValidate?: boolean,
   ): void;
   setFieldTouched(
     field: string,
     isTouched?: boolean,
-    shouldValidate?: boolean
+    shouldValidate?: boolean,
   ): void;
   /** Validate form values */
   validateForm(values?: any): void;
@@ -61,9 +61,9 @@ export interface FormikActions<Values: Object> {
   setFormikState(
     f: (
       prevState: $ReadOnly<FormikState<Values>>,
-      props: any
+      props: any,
     ) => $Shape<FormikState<Values>>,
-    callback?: () => any
+    callback?: () => any,
   ): void;
 }
 
@@ -75,7 +75,7 @@ export type FormikSharedConfig = {
   /** Tell Formik if initial form values are valid or not on first render */
   isInitialValid?: boolean | ((props: {}) => boolean | void),
   /** Should Formik reset the form when new initialValues change */
-  enableReinitialize?: boolean
+  enableReinitialize?: boolean,
 };
 
 export type FormikConfig<Values: Object> = {
@@ -114,7 +114,7 @@ export type FormikConfig<Values: Object> = {
   /**
    * React children or child render callback
    */
-  children?: ((props: FormikProps<Values>) => React$Node) | React$Node
+  children?: ((props: FormikProps<Values>) => React$Node) | React$Node,
 };
 
 /**
@@ -137,7 +137,7 @@ export type FormikState<Values: Object> = {
   /** Top level status state, in case you need it */
   status?: any,
   /** Number of times user tried to submit the form */
-  submitCount: number
+  submitCount: number,
 };
 
 /**
@@ -149,7 +149,7 @@ export type FormikComputedProps<Values: Object> = {
   /** Result of isInitiallyValid on mount, then whether true values pass validation. */
   +isValid: boolean,
   /** initialValues */
-  +initialValues: Values
+  +initialValues: Values,
 };
 
 /**
@@ -163,7 +163,7 @@ export type FormikHandlers = {
   /** Classic React blur handler */
   handleBlur: (e: any) => void,
   /** Reset form event handler  */
-  handleReset: () => void
+  handleReset: () => void,
 };
 
 export type FormikProps<Values: Object> = FormikActions<Values> & {|
@@ -174,8 +174,8 @@ export type FormikProps<Values: Object> = FormikActions<Values> & {|
 
 export class Formik<
   Values: Object,
-  Props: FormikConfig<Values> = FormikConfig<Values>
-  > extends React$Component<Props> {}
+  Props: FormikConfig<Values> = FormikConfig<Values>,
+> extends React$Component<Props> {}
 
 /**
  * Note: These typings could be more restrictive, but then it would limit the
@@ -207,9 +207,9 @@ export type FieldProps = {
     /** Value of the input */
     value: any,
     /* name of the input */
-    name: string
+    name: string,
   },
-  form: FormikProps<any>
+  form: FormikProps<any>,
 };
 
 /*
@@ -234,5 +234,4 @@ export default enhancer(MyFormikHoc);
 export var Field: React$StatelessFunctionalComponent<any>;
 
 export var Form: React$StatelessFunctionalComponent<any>;
-
-
+/* eslint-enable */

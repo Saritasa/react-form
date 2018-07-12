@@ -10,16 +10,28 @@ export type FromInternalComponentProps<Values: Object> = FormikProps<Values> & {
   disabledSubmit?: boolean,
   valid: boolean,
   submitting: boolean,
-  onChange: (SyntheticInputEvent<*> => any),
-  onBlur: (SyntheticFocusEvent<*> => any),
-  onSubmit: (SyntheticEvent<*> => any),
-  onReset: (SyntheticEvent<*> => any),
+  onChange: (SyntheticInputEvent<*>) => any,
+  onBlur: (SyntheticFocusEvent<*>) => any,
+  onSubmit: (SyntheticEvent<*>) => any,
+  onReset: (SyntheticEvent<*>) => any,
 };
 
+/**
+ * Creates internal Form component to handle changes and improve default Formik's behavior.
+ *
+ * @private
+ * @param {React.Component} Component View part of form.
+ * @returns {FormInternal} New component that wraps passed.
+ */
 export function createFormInternalComponent<Values: Object>(Component: *) {
+  /**
+   * Generated component to improve default Formik's behavior.
+   *
+   * @extends React.Component
+   */
   class FormInternal extends React.PureComponent<
     FromInternalComponentProps<Values>,
-    > {
+  > {
     values: Values;
 
     static defaultProps = {
@@ -43,7 +55,7 @@ export function createFormInternalComponent<Values: Object>(Component: *) {
     handleChange = (
       event: SyntheticInputEvent<
         HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement,
-        >,
+      >,
     ) => {
       if (this.shouldPreventChanges()) {
         event.preventDefault();
