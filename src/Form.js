@@ -1,10 +1,10 @@
 // @flow
 import * as React from 'react';
 import { Formik } from 'formik';
-import {
-  type FormikErrors,
-  type FormikActions,
-  type FormikConfig,
+import type {
+  FormikErrors,
+  FormikActions,
+  FormikConfig,
 } from './FormikTypes';
 
 import { createFormInternalComponent } from './createFormInternalComponent';
@@ -28,7 +28,7 @@ export type FormProps<Values: Object> = {
  */
 export class Form<Values: Object> extends React.PureComponent<
   FormProps<Values>,
-> {
+  > {
   static defaultProps = {
     allowChangesWhileSubmitting: false,
     component: () => `Use #component property for form's layout.`,
@@ -45,7 +45,7 @@ export class Form<Values: Object> extends React.PureComponent<
       | Class<React.Component<*>>
       | Class<React.Component<*, *>>
       | ((*) => React.Node),
-    > = createFormInternalComponent(props.component);
+      > = createFormInternalComponent(props.component);
 
     this.Component = formikProps => (
       <Component {...this.props} {...formikProps} />

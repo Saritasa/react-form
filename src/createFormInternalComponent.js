@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { type FormikProps } from './FormikTypes';
+import type { FormikProps } from './FormikTypes';
 
 import { FormValueManipulationContext } from './FormValueManipulationContext';
 
