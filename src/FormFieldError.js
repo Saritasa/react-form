@@ -24,6 +24,8 @@ export const FormFieldError = ({
   <Field
     name={name}
     render={({ errors, touched }) => {
+      if (!touched) return null;
+      if (!errors) return null;
       if (!touched[name]) return null;
       if (!errors[name]) return null;
 

@@ -64,6 +64,7 @@ export class FormField<ValueType> extends React.PureComponent<
     const { touched, errors } = form;
     const { name } = field;
 
+    if (!errors) return null;
     if (!touched[name]) return null;
 
     return errors[name];
