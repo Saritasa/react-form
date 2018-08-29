@@ -86,12 +86,13 @@ export class FormField<ValueType> extends React.PureComponent<
     form,
     ...props
   }: PropsFromFormikField<ValueType>) => {
-    const { component: Component } = this.props;
+    const { component: Component, ...originalProps } = this.props;
 
     return (
       <FormValueManipulationContext.Consumer>
         {({ setFieldValue, onChange }) => (
           <Component
+            {...originalProps}
             {...field}
             {...props}
             error={FormField.getError({ field, form })}
