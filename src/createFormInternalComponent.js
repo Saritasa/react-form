@@ -99,7 +99,7 @@ export function createFormInternalComponent<Values: Object>(Component: *) {
         ...rest
       } = this.props;
 
-      const disabledSubmit = disabledFromParent || isSubmitting;
+      const disabledSubmit = disabledFromParent || isSubmitting || !isValid;
 
       return {
         ...rest,
