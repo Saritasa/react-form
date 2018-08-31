@@ -6,6 +6,7 @@
     "prebuild": "rimraf ./build",
     "build": "babel -d ./build --ignore *.test.js ./src",
     "postbuild": "node add-flow-types",
+    "prepublish": "npm run build",
     "flow": "flow",
     "lint": "npm run _lint",
     "lint:fix": "npm run _lint -- --fix",
