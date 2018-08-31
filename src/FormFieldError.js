@@ -23,7 +23,7 @@ export const FormFieldError = ({
 }: FormFieldErrorProps) => (
   <Field
     name={name}
-    render={({ form: { errors, touched }}) => {
+    render={({ form: { errors, touched } }) => {
       if (!touched) return null;
       if (!errors) return null;
       if (!touched[name]) return null;

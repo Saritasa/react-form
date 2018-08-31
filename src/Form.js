@@ -1,13 +1,10 @@
 // @flow
 import * as React from 'react';
 import { Formik } from 'formik';
-import type {
-  FormikErrors,
-  FormikActions,
-  FormikConfig,
-} from './FormikTypes';
+import type { FormikErrors, FormikActions, FormikConfig } from './FormikTypes';
 
 import { createFormInternalComponent } from './createFormInternalComponent';
+import { prepareErrors } from './prepareErrors';
 
 type FormikInstance = Formik<> & FormikActions<$PropertyType<*, 'values'>>;
 
@@ -28,7 +25,7 @@ export type FormProps<Values: Object> = {
  */
 export class Form<Values: Object> extends React.PureComponent<
   FormProps<Values>,
-  > {
+> {
   static defaultProps = {
     allowChangesWhileSubmitting: false,
     component: () => `Use #component property for form's layout.`,
@@ -45,7 +42,7 @@ export class Form<Values: Object> extends React.PureComponent<
       | Class<React.Component<*>>
       | Class<React.Component<*, *>>
       | ((*) => React.Node),
-      > = createFormInternalComponent(props.component);
+    > = createFormInternalComponent(props.component);
 
     this.Component = formikProps => (
       <Component {...this.props} {...formikProps} />
@@ -60,7 +57,7 @@ export class Form<Values: Object> extends React.PureComponent<
   updateErrorsIfNeed(props: any) {
     if (this.props.errors !== props.errors) {
       if (this.formik) {
-        this.formik.setErrors(props.errors);
+        this.formik.setErrors(prepareErrors(props.errors));
       }
     }
   }
@@ -81,6 +78,14 @@ export class Form<Values: Object> extends React.PureComponent<
     this.props.onSubmit(data, ...rest);
   };
 
+  validate = (values: $Shape<Values>) => {
+    const { validate } = this.props;
+
+    if (!validate) return null;
+
+    return prepareErrors(validate(values));
+  };
+
   render() {
     const {
       initialValues,
@@ -98,10 +103,9 @@ export class Form<Values: Object> extends React.PureComponent<
         {...rest}
         ref={this.handleRef}
         component={Component}
-        errors={errors}
         initialValues={initialValues}
         onSubmit={this.handleSubmit}
-        validate={validate}
+        validate={this.validate}
       />
     );
   }
