@@ -19,7 +19,7 @@ export type FormFieldErrorProps = {
  */
 export const FormFieldError = ({
   name,
-  component: Component,
+  component,
 }: FormFieldErrorProps) => (
   <Field
     name={name}
@@ -29,7 +29,7 @@ export const FormFieldError = ({
       if (!touched[name]) return null;
       if (!errors[name]) return null;
 
-      return <FormError component={Component} error={errors[name]} />;
+      return <FormError component={component} error={errors[name]} />;
     }}
   />
 );
