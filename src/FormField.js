@@ -8,8 +8,8 @@ export type PropsFromFormikField<ValueType> = {
   field: {
     name: string,
     value: ValueType,
-    onChange: <T>(SyntheticInputEvent<T>) => void,
-    onBlur: <T>(SyntheticFocusEvent<T>) => void,
+    onChange: <T: HTMLElement>(SyntheticInputEvent<T>) => void,
+    onBlur: <T: HTMLElement>(SyntheticFocusEvent<T>) => void,
   },
   form: {
     touched: { [string]: boolean },
@@ -23,8 +23,8 @@ export type FormFieldComponentProps<ValueType> = {
   value: ValueType,
   error: ?string,
   setFieldValue: (string, ValueType) => void,
-  onChange: <T>(SyntheticInputEvent<T>) => void,
-  onBlur: <T>(SyntheticFocusEvent<T>) => void,
+  onChange: <T: HTMLElement>(SyntheticInputEvent<T>) => void,
+  onBlur: <T: HTMLElement>(SyntheticFocusEvent<T>) => void,
 };
 
 export type FormFieldProps<ValueType> = {
