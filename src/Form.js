@@ -27,6 +27,7 @@ export class Form<Values: Object> extends React.PureComponent<
   FormProps<Values>,
 > {
   Component: (*) => React.Node;
+
   formik: ?FormikInstance;
 
   static defaultProps = {

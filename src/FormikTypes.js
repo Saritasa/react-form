@@ -11,6 +11,29 @@ export type FormikTouched<Values: Object> = {
 };
 
 /**
+ * Formik state tree
+ */
+export type FormikState<Values: Object> = {
+  /** Form values */
+  values: Values,
+  /**
+   * Top level error, in case you need it
+   * @deprecated since 0.8.0
+   */
+  error?: any,
+  /** map of field names to specific error for that field */
+  errors: FormikErrors<Values>,
+  /** map of field names to whether the field has been touched */
+  touched: FormikTouched<Values>,
+  /** whether the form is currently submitting */
+  isSubmitting: boolean,
+  /** Top level status state, in case you need it */
+  status?: any,
+  /** Number of times user tried to submit the form */
+  submitCount: number,
+};
+
+/**
  * Using interface here because interfaces support overloaded method signatures
  * https://github.com/facebook/flow/issues/1556#issuecomment-200051475
  */
@@ -78,6 +101,38 @@ export type FormikSharedConfig = {
   enableReinitialize?: boolean,
 };
 
+/**
+ * Formik computed properties. These are read-only.
+ */
+export type FormikComputedProps<Values: Object> = {
+  /** True if any input has been touched. False otherwise. */
+  +dirty: boolean,
+  /** Result of isInitiallyValid on mount, then whether true values pass validation. */
+  +isValid: boolean,
+  /** initialValues */
+  +initialValues: Values,
+};
+
+/**
+ * Formik form event handlers
+ */
+export type FormikHandlers = {
+  /** Form submit handler */
+  handleSubmit: (e: SyntheticEvent<any>) => any,
+  /** Classic React change handler, keyed by input name */
+  handleChange: (e: SyntheticEvent<any>) => any,
+  /** Classic React blur handler */
+  handleBlur: (e: any) => void,
+  /** Reset form event handler  */
+  handleReset: () => void,
+};
+
+export type FormikProps<Values: Object> = FormikActions<Values> & {|
+  ...$Exact<FormikHandlers>,
+  ...$Exact<FormikComputedProps<Values>>,
+  ...$Exact<FormikState<Values>>,
+|};
+
 export type FormikConfig<Values: Object> = {
   ...$Exact<FormikSharedConfig>,
   /**
@@ -116,61 +171,6 @@ export type FormikConfig<Values: Object> = {
    */
   children?: ((props: FormikProps<Values>) => React$Node) | React$Node,
 };
-
-/**
- * Formik state tree
- */
-export type FormikState<Values: Object> = {
-  /** Form values */
-  values: Values,
-  /**
-   * Top level error, in case you need it
-   * @deprecated since 0.8.0
-   */
-  error?: any,
-  /** map of field names to specific error for that field */
-  errors: FormikErrors<Values>,
-  /** map of field names to whether the field has been touched */
-  touched: FormikTouched<Values>,
-  /** whether the form is currently submitting */
-  isSubmitting: boolean,
-  /** Top level status state, in case you need it */
-  status?: any,
-  /** Number of times user tried to submit the form */
-  submitCount: number,
-};
-
-/**
- * Formik computed properties. These are read-only.
- */
-export type FormikComputedProps<Values: Object> = {
-  /** True if any input has been touched. False otherwise. */
-  +dirty: boolean,
-  /** Result of isInitiallyValid on mount, then whether true values pass validation. */
-  +isValid: boolean,
-  /** initialValues */
-  +initialValues: Values,
-};
-
-/**
- * Formik form event handlers
- */
-export type FormikHandlers = {
-  /** Form submit handler */
-  handleSubmit: (e: SyntheticEvent<any>) => any,
-  /** Classic React change handler, keyed by input name */
-  handleChange: (e: SyntheticEvent<any>) => any,
-  /** Classic React blur handler */
-  handleBlur: (e: any) => void,
-  /** Reset form event handler  */
-  handleReset: () => void,
-};
-
-export type FormikProps<Values: Object> = FormikActions<Values> & {|
-  ...$Exact<FormikHandlers>,
-  ...$Exact<FormikComputedProps<Values>>,
-  ...$Exact<FormikState<Values>>,
-|};
 
 export class Formik<
   Values: Object,
