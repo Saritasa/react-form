@@ -2,16 +2,12 @@
 import * as React from 'react';
 
 type FormErrorComponentProps = {
-  children: string,
+  children: ?React.Node,
 };
 
 export type FormErrorProps = {
   error: ?string,
-  component:
-    | string
-    | Class<React.Component<FormErrorComponentProps, any>>
-    | Class<React.Component<FormErrorComponentProps>>
-    | React.StatelessFunctionalComponent<FormErrorComponentProps>,
+  component: string | React.ComponentType<FormErrorComponentProps>,
 };
 
 /**
