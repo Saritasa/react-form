@@ -42,16 +42,29 @@ export function createFormInternalComponent<Values: Object>(Component: *) {
       fieldRules: <V>(values: V): V => values,
     };
 
+    /**
+     * Default react hook. Save values to the component.
+     */
     componentWillMount() {
       this.performChangeValues(this.props);
     }
 
+    /**
+     * Check if values were changed and save it.
+     *
+     * @param {FromInternalComponentProps<Values>} nextProps Next props.
+     */
     componentWillReceiveProps(nextProps: *) {
       if (nextProps.values !== this.values) {
         this.performChangeValues(nextProps);
       }
     }
 
+    /**
+     * Handle onChange event on native controls.
+     *
+     * @param {SyntheticInputEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>} event Change event.
+     */
     handleChange = (
       event: SyntheticInputEvent<
         HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement,
@@ -66,10 +79,12 @@ export function createFormInternalComponent<Values: Object>(Component: *) {
       }
     };
 
-    shouldPreventChanges() {
-      return this.props.isSubmitting && !this.props.allowChangesWhileSubmitting;
-    }
-
+    /**
+     * Sets field value.
+     *
+     * @param {string} field Field to change.
+     * @param {*} value Next value.
+     */
     setFieldValue = (field: string, value: *) => {
       if (this.shouldPreventChanges()) return;
 
@@ -80,6 +95,20 @@ export function createFormInternalComponent<Values: Object>(Component: *) {
       setValues(this.values);
     };
 
+    /**
+     * Checks if any change should be preventing.
+     *
+     * @returns {boolean} True if changes should be prevented.
+     */
+    shouldPreventChanges() {
+      return this.props.isSubmitting && !this.props.allowChangesWhileSubmitting;
+    }
+
+    /**
+     * Applies fieldRules and sets values for the form.
+     *
+     * @param {FromInternalComponentProps<Values>} props Component's props.
+     */
     performChangeValues(props: FromInternalComponentProps<Values>) {
       const { setValues, values, fieldRules } = props;
 
@@ -87,6 +116,11 @@ export function createFormInternalComponent<Values: Object>(Component: *) {
       setValues(this.values);
     }
 
+    /**
+     * Gets component props.
+     *
+     * @returns {Object} Props for component.
+     */
     getComponentProps(): * {
       const {
         handleSubmit,
@@ -114,6 +148,11 @@ export function createFormInternalComponent<Values: Object>(Component: *) {
       };
     }
 
+    /**
+     * Renders FormValueContext.Provider with Component.
+     *
+     * @returns {React.Element} Rendered form.
+     */
     render() {
       const props = this.getComponentProps();
 

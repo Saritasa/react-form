@@ -7,9 +7,7 @@ type FormErrorComponentProps = {
 
 export type FormErrorProps = {
   error: ?string,
-  component:
-    | string
-    | React.ComponentType<FormErrorComponentProps>,
+  component: string | React.ComponentType<FormErrorComponentProps>,
 };
 
 /**
