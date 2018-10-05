@@ -17,10 +17,7 @@ export type FormFieldErrorProps = {
  * @returns {?React.Node} `null` if field is not touched or there is not error.
  *   Or it returns rendered `component` with field's error as #error property.
  */
-export const FormFieldError = ({
-  name,
-  component,
-}: FormFieldErrorProps) => (
+export const FormFieldError = ({ name, component }: FormFieldErrorProps) => (
   <Field
     name={name}
     render={({ form: { errors, touched } }) => {
