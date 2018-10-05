@@ -1,4 +1,7 @@
 # @saritasa/react-form
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/Saritasa/react-form.svg)](https://greenkeeper.io/)
+
 This is a package for simple form building.
 
 Install:
