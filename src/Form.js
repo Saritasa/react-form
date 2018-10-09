@@ -119,7 +119,7 @@ export class Form<Values: Object> extends React.PureComponent<
   validate = (values: $Shape<Values>) => {
     const { validate } = this.props;
 
-    if (!validate) return null;
+    if (!validate) return prepareErrors(null);
 
     return prepareErrors(validate(values));
   };
