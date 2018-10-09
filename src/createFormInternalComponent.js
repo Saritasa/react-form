@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import type { FormikProps } from './FormikTypes';
-
+import { setIn } from './utils';
 import { FormValueManipulationContext } from './FormValueManipulationContext';
 
 export type FromInternalComponentProps<Values: Object> = FormikProps<Values> & {
@@ -88,10 +88,21 @@ export function createFormInternalComponent<Values: Object>(Component: *) {
     setFieldValue = (field: string, value: *) => {
       if (this.shouldPreventChanges()) return;
 
-      const { setValues, fieldRules } = this.props;
+      const { fieldRules } = this.props;
       const { values } = this;
 
-      this.values = fieldRules({ ...values, [field]: value }, field);
+      const nextValues = fieldRules(setIn(values, field, value), field);
+      this.setValues(nextValues);
+    };
+
+    /**
+     * Sets updated values.
+     * @param {Values} values values to set.
+     */
+    setValues = (values: Values) => {
+      const { setValues } = this.props;
+
+      this.values = values;
       setValues(this.values);
     };
 
@@ -110,10 +121,9 @@ export function createFormInternalComponent<Values: Object>(Component: *) {
      * @param {FromInternalComponentProps<Values>} props Component's props.
      */
     performChangeValues(props: FromInternalComponentProps<Values>) {
-      const { setValues, values, fieldRules } = props;
+      const { values, fieldRules } = props;
 
-      this.values = fieldRules(values);
-      setValues(this.values);
+      this.setValues(this.values);
     }
 
     /**
