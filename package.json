@@ -1,6 +1,6 @@
 {
   "name": "@saritasa/react-form",
-  "version": "0.3.14",
+  "version": "0.4.0",
   "description": "Package that wraps Formik lib to use saritasa's code-style",
   "scripts": {
     "prebuild": "rimraf ./build",
