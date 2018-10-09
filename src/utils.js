@@ -1,2 +1,2 @@
 // @flow
-export { setIn, getIn, setNestedObjectValues } from 'formik'
+export { setIn, getIn, setNestedObjectValues } from 'formik';

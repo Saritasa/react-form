@@ -92,12 +92,14 @@ export function createFormInternalComponent<Values: Object>(Component: *) {
       const { values } = this;
 
       const nextValues = fieldRules(setIn(values, field, value), field);
+
       this.setValues(nextValues);
     };
 
     /**
      * Sets updated values.
-     * @param {Values} values values to set.
+     *
+     * @param {Values} values Values to set.
      */
     setValues = (values: Values) => {
       const { setValues } = this.props;
@@ -123,7 +125,7 @@ export function createFormInternalComponent<Values: Object>(Component: *) {
     performChangeValues(props: FromInternalComponentProps<Values>) {
       const { values, fieldRules } = props;
 
-      this.setValues(this.values);
+      this.setValues(fieldRules(values));
     }
 
     /**
