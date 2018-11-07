@@ -19,9 +19,11 @@ type FormValueManipulationContextValue = {
   onChange: (event: any) => void,
 };
 
+const defaultValue = {
+  setFieldValue: ensureContextIsNotEmpty,
+  onChange: ensureContextIsNotEmpty,
+};
+
 export const FormValueManipulationContext = React.createContext<FormValueManipulationContextValue>(
-  {
-    setFieldValue: ensureContextIsNotEmpty,
-    onChange: ensureContextIsNotEmpty,
-  },
+  defaultValue,
 );
