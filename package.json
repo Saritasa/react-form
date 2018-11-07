@@ -13,7 +13,7 @@
     "lint:changed": "npm run _lint -- --cache",
     "linttest:changed": "npm run _linttest -- --cache",
     "_lint": "eslint -c ./.eslintrc.yml \"src/**/*.js\" --ignore-pattern \"src/**/*.test.js\"",
-    "test": "NODE_ENV=test mocha --require babel-core/register --require ./test-support --recursive \"src/**/*.test.js\""
+    "test": "NODE_ENV=test mocha --compilers js:@babel/register --require ./test-support --recursive \"src/**/*.test.js\""
   },
   "keywords": [
     "saritasa",
@@ -42,6 +42,7 @@
     "@babel/preset-env": "^7.1.5",
     "@babel/preset-flow": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
+    "@babel/register": "^7.0.0",
     "@saritasa/eslint-config-react": "^1.0.0",
     "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
