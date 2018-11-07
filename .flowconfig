@@ -8,6 +8,7 @@ module.file_ext=.json
 module.file_ext=.jsx
 
 [ignore]
+<PROJECT_ROOT>/build/
 <PROJECT_ROOT>/node_modules/@babel/code-frame/.* # generated automatically cause dev-dependency
 <PROJECT_ROOT>/node_modules/@babel/generator/.* # generated automatically cause dev-dependency
 <PROJECT_ROOT>/node_modules/@babel/helper-function-name/.* # generated automatically cause dev-dependency

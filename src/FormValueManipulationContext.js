@@ -14,7 +14,12 @@ function ensureContextIsNotEmpty(...rest: any) {
   );
 }
 
-export const FormValueManipulationContext = React.createContext({
+type FormValueManipulationContextValue = {
+  setFieldValue: (string, any) => void,
+  onChange: (event: any) => void,
+};
+
+export const FormValueManipulationContext = React.createContext<FormValueManipulationContextValue>({
   setFieldValue: ensureContextIsNotEmpty,
   onChange: ensureContextIsNotEmpty,
 });
