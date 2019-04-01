@@ -12,7 +12,7 @@ export type FromInternalComponentProps<Values: Object> = FormikProps<Values> & {
   submitting: boolean,
   onChange: (SyntheticInputEvent<*>) => any,
   onBlur: (SyntheticFocusEvent<*>) => any,
-  onSubmit: (SyntheticEvent<*>) => any,
+  onSubmit: (Values) => any,
   onReset: (SyntheticEvent<*>) => any,
 };
 
